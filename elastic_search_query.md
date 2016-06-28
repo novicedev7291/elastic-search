@@ -1,15 +1,20 @@
+# CREATING INDEX
+POST /library
+
+# SEARCH ALL DOCS IN INDEX 
+```json
 GET _search
 {
   "query": {
     "match_all": {}
   }
 }
+```
 
-# SEARCH ALL DOCS IN INDEX 
 GET /library/books/_search
 
-POST /library
-
+# CREATE SINGLE DOCUMENT
+```json
 PUT /library/books/1
 {
   "title":"Elastic Search 1",
@@ -18,11 +23,14 @@ PUT /library/books/1
     "price":100.0
   }
 }
+```
 
+# FETCH SINGLE DOCUMENT
 GET /library/books/1
 
 # UPDATE OPERATIONS
 ##Elastic search updating a single doc
+```json
 POST /library/books/1/_update
 {
   "doc":{
@@ -31,10 +39,11 @@ POST /library/books/1/_update
     }
   }
 }
+```
 
 # BULK OPERATOINS
 ##Elastic search bulk operations
-
+```json
 POST /library/books/_bulk
 {"index":{"_id":2}}
 {"title":"Game Of Thrones 1","price":150.0}
@@ -54,3 +63,4 @@ POST /library/books/_bulk
 {"title":"Steve Jobs","price":299.0}
 {"index":{"_id":1}}
 {"title":"The Vinci Code, Dan Brown","price":310.0}
+```
