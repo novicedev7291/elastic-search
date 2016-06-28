@@ -5,7 +5,7 @@ GET _search
   }
 }
 
-## SEARCH ALL DOCS IN INDEX 
+# SEARCH ALL DOCS IN INDEX 
 GET /library/books/_search
 
 POST /library
@@ -21,8 +21,8 @@ PUT /library/books/1
 
 GET /library/books/1
 
-## UPDATE OPERATIONS
-#Elastic search updating a single doc
+# UPDATE OPERATIONS
+##Elastic search updating a single doc
 POST /library/books/1/_update
 {
   "doc":{
@@ -32,8 +32,8 @@ POST /library/books/1/_update
   }
 }
 
-## BULK OPERATOINS
-#Elastic search bulk operations
+# BULK OPERATOINS
+##Elastic search bulk operations
 
 POST /library/books/_bulk
 {"index":{"_id":2}}
