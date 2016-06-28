@@ -10,8 +10,54 @@ GET _search
   }
 }
 ```
+### Above will give all indexes' result.
 
 GET /library/books/_search
+
+###Search queries with multiple clauses like (where in sql)
+```json
+GET /library/books/_search
+{
+  "query": {
+    "bool": {
+      "should or must": [
+        {
+          "match": {
+            "title": "Effective"
+          }
+        },{
+          "match_phrase": {
+            "title": "The future"
+          }
+        }
+      ]
+    }
+  },
+  "highlight": {
+    "fields": {
+      "title": {}
+    }
+  }
+}
+```
+### Filter results with some range or values
+```json
+GET /library/books/_search
+{
+  "query": {
+    "filtered": {
+      "filter": {
+        "range": {
+          "price": {
+            "gte": 200,
+            "lte": 999
+          }
+        }
+      }
+    }
+  }
+}
+```
 
 # CREATE SINGLE DOCUMENT
 ```json
@@ -64,3 +110,39 @@ POST /library/books/_bulk
 {"index":{"_id":1}}
 {"title":"The Vinci Code, Dan Brown","price":310.0}
 ```
+
+# MAPPINGS
+
+##Check Mappings of an Index
+
+GET /library/_mappings
+
+##Put a new field using mapping.
+```json
+PUT /library/books/_mapping
+{
+  "books":{
+    "properties":{
+      "ISBN":{
+        "type":"string"
+      }
+    }
+  }
+}
+```
+## Specify analyser using mapping.
+```json
+PUT /library/books/_mapping
+{
+  "books":{
+    "properties":{
+      "ISBN":{
+        "type":"string",
+	"analyzer":"english"
+      }
+    }
+  }
+}
+```
+
+
